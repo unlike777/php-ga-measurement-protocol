@@ -48,7 +48,11 @@ class HttpClient
      */
     public function __destruct()
     {
-        Promise\unwrap(self::$promises);
+        if (class_exists(Promise\Utils::class)) {
+            Promise\Utils::unwrap(self::$promises);
+        } else {
+            Promise\unwrap(self::$promises);
+        }
     }
 
     /**
